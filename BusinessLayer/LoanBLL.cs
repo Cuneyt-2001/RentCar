@@ -1,0 +1,48 @@
+﻿using DataAccessLayer.Interfaces;
+using Entity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BusinessLayer
+{
+    public class LoanBLL
+    {
+        private ILoanDAL _IloanDAL;
+
+        public LoanBLL(ILoanDAL iloanDAL)
+        {
+            _IloanDAL = iloanDAL;
+        }
+        public int AddLoan(Loan loan)
+        {
+            return _IloanDAL.AddLoan(loan); 
+        }
+        public List<Loan> GetAll()
+        {
+            return _IloanDAL.GetAll();
+        }
+        public List<Loan> GetLoanbyUser(int id)
+        {
+           return _IloanDAL.GetLoanbyUser(id);
+        }
+        public bool CheckAvailibilityofBook(Loan loan)
+        {
+            TimeSpan timeSpan = loan.ReturnDate - loan.LoanDate;
+            if (!(loan.LoanDate >= DateTime.Now.Date && loan.ReturnDate >= DateTime.Now.Date && loan.LoanDate.Date <= loan.ReturnDate && timeSpan.Days <= 20))
+            {
+
+                return false;
+            }
+
+            var allLoans = _IloanDAL.GetAll();
+            if (allLoans.Any(a => a.CarID == loan.CarID && ((loan.LoanDate >= a.LoanDate && loan.LoanDate <= a.ReturnDate) || (loan.ReturnDate >= a.LoanDate && loan.ReturnDate <= a.ReturnDate))))
+            {
+                return false;
+            }
+            return true;
+        }
+    }
+}
