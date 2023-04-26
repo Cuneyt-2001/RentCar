@@ -20,16 +20,30 @@ namespace DataAccessLayer.Concrete
         public bool EditAuto(Car car)
         {
             using var context_ = new Context();
+            var findcar = GetCar(car.CarID);
+            findcar.CarID = car.CarID;
+            findcar.Brand = car.Brand;
+            findcar.Model=car.Model;
+            findcar.Body = car.Body;
+            findcar.Year = car.Year;
+            findcar.Transmission = car.Transmission;
             context_.Update(car);
             context_.SaveChanges();
             return true;
+
+
+
+            //using var context_ = new Context();
+            //context_.Update(car);
+            //context_.SaveChanges();
+            //return true;
         }
 
         public Car GetCar(int id)
         {
             using var context_ = new Context();
             return context_.Cars.ToList().Where(x => x.CarID == id).First();
-           // return context_.Set<Car>().Find(id);
+            // return context_.Set<Car>().Find(id);
         }
 
         public List<Car> GetCars()

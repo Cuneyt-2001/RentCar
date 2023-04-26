@@ -13,8 +13,8 @@ namespace BusinessLayer.Validations
         public ReviewValidations()
         {
             RuleFor(x => x.Reviewcontent).NotEmpty().WithMessage("this is required field");
-            RuleFor(x => x.Reviewcontent).MinimumLength(1).WithMessage("Minimum Length of characters 1");
-            RuleFor(x => x.Reviewcontent).MaximumLength(50).WithMessage("Maximum Length of characters 50");
+            RuleFor(x => x.Reviewcontent).MinimumLength(10).WithMessage("Minimum Length of characters 1");
+           // RuleFor(x => x.Reviewcontent).MaximumLength(50).WithMessage("Maximum Length of characters 50");
 
 
 

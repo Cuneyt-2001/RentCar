@@ -9,6 +9,14 @@ namespace Entity
 {
     public class User
     {
+        public User()
+        {
+            //Look here
+            Loans = new List<Loan>();
+            Reviews = new List<Review>();
+         
+        }
+
         [Key]
         public int UserID { get; set; }
         public string Name { get; set; }
@@ -16,7 +24,7 @@ namespace Entity
         public string Email { get; set; }
         public bool Role { get; set; }
         public string Password { get; set; }
-        public List<Loan> Loans { get; set; }
-        public List<Review> Reviews { get; set; }
+        public   List<Loan> Loans { get; set; } 
+        public   List<Review> Reviews { get; set; } 
     }
 }

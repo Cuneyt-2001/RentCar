@@ -10,7 +10,7 @@ using UnitTests.Mock;
 
 namespace UnitTests.Test
 {
-    [Microsoft.VisualStudio.TestTools.UnitTesting.TestClass]
+  [TestClass]
     public class CarTest
     {
         [TestMethod]
@@ -35,6 +35,7 @@ namespace UnitTests.Test
             };
 
 
+
             //Act
 
             carBLL.AddCar(car);
@@ -56,116 +57,118 @@ namespace UnitTests.Test
 
 
         }
-        [TestMethod]
-        public void GetCar()
+   
+       
+    [TestMethod]
+    public void GetCar()
+    {
+        //Arrange
+        CarMock carmock = new CarMock();
+
+        CarBLL carBLL = new CarBLL(carmock);
+        var carlist = carBLL.GetCars();
+        var getcar = carlist[0];
+        //Act
+        carBLL.GetCar(getcar.CarID);
+
+        //Assert
+        Assert.AreEqual(1, getcar.CarID);
+        Assert.AreEqual(getcar.CarID, carmock.cars.First().CarID);
+        Assert.AreEqual(getcar.Body, carmock.cars.First().Body);
+        Assert.AreEqual(getcar.Brand, carmock.cars.First().Brand);
+        Assert.AreEqual(getcar.Model, carmock.cars.First().Model);
+        Assert.AreEqual(getcar.Transmission, carmock.cars.First().Transmission);
+        Assert.AreEqual(getcar.Year, carmock.cars.First().Year);
+        Assert.AreEqual(getcar.Visibility, carmock.cars.First().Visibility);
+
+    }
+    [TestMethod]
+    public void GetCars()
+    {
+        //Arrange
+        CarMock carmock = new CarMock();
+
+        CarBLL carBLL = new CarBLL(carmock);
+
+
+
+        //Act
+
+        List<Car> cars = carBLL.GetCars();
+
+
+        //Assert
+        Assert.AreEqual(carmock.GetCars().Count(), cars.Count); ;
+        Assert.AreEqual(2, cars.Count);
+        for (int i = 0; i < cars.Count; i++)
         {
-            //Arrange
-            CarMock carmock = new CarMock();
-
-            CarBLL carBLL = new CarBLL(carmock);
-            var carlist = carBLL.GetCars();
-            var getcar = carlist[0];
-            //Act
-            carBLL.GetCar(getcar.CarID);
-
-            //Assert
-            Assert.AreEqual(3, getcar.CarID);
-            Assert.AreEqual(getcar.CarID, carmock.cars.First().CarID);
-            Assert.AreEqual(getcar.Body, carmock.cars.First().Body);
-            Assert.AreEqual(getcar.Brand, carmock.cars.First().Brand);
-            Assert.AreEqual(getcar.Model, carmock.cars.First().Model);
-            Assert.AreEqual(getcar.Transmission, carmock.cars.First().Transmission);
-            Assert.AreEqual(getcar.Year, carmock.cars.First().Year);
-            Assert.AreEqual(getcar.Visibility, carmock.cars.First().Visibility);
-
-        }
-        [TestMethod]
-        public void GetCars()
-        {
-            //Arrange
-            CarMock carmock = new CarMock();
-
-            CarBLL carBLL = new CarBLL(carmock);
-
-
-
-            //Act
-
-            List<Car> cars = carBLL.GetCars();
-
-
-            //Assert
-            Assert.AreEqual(carmock.GetCars().Count(), cars.Count); ;
-            Assert.AreEqual(2, cars.Count);
-            for (int i = 0; i < cars.Count; i++)
-            {
-                Assert.AreEqual(cars[i].CarID, carmock.cars[i].CarID);
-                Assert.AreEqual(cars[i].Model, carmock.cars[i].Model);
-                Assert.AreEqual(cars[i].Year, carmock.cars[i].Year);
-                Assert.AreEqual(cars[i].Transmission, carmock.cars[i].Transmission);
-                Assert.AreEqual(cars[i].Brand, carmock.cars[i].Brand);
-                Assert.AreEqual(cars[i].Body, carmock.cars[i].Body);
-                Assert.AreEqual(cars[i].Visibility, carmock.cars[i].Visibility);
-            }
-
-        }
-        [TestMethod]
-        public void RemoveAuto()
-        {
-            //Arrange
-            CarMock carmock = new CarMock();
-
-            CarBLL carBLL = new CarBLL(carmock);
-
-            var carlist = carBLL.GetCars();
-            var getcar = carlist[0];
-            //Act
-            carBLL.RemoveAuto(getcar);
-            //Assert
-            Assert.AreEqual(1, carmock.cars.Count);
-            Assert.AreEqual(2, carmock.cars.First().CarID);
-            Assert.AreEqual("Mercedes", carmock.cars[0].Brand);
-            Assert.AreEqual("Sedan", carmock.cars.First().Body);
-
-        }
-        [TestMethod]
-        public void EditAuto()
-        {
-            //Arrange
-
-            CarMock carmock = new CarMock();
-
-            CarBLL carBLL = new CarBLL(carmock);
-            Car car2 = new Car()
-            {
-                CarID = 3,
-                Body = "Hatchback",
-                Brand = "Honda",
-                Model = "Civic",
-                Transmission = "Automaat",
-                Year = "2018",
-                Visibility = true
-
-            };
-
-
-            //Act
-
-            carBLL.EditAuto(car2);
-
-
-            //Assert
-
-            Assert.AreEqual(car2.CarID, carmock.cars[1].CarID);
-            Assert.AreEqual(car2.Model, carmock.cars[1].Model);
-            Assert.AreEqual(car2.Year, carmock.cars[1].Year);
-            Assert.AreEqual(car2.Transmission, carmock.cars[1].Transmission);
-            Assert.AreEqual(car2.Brand, carmock.cars[1].Brand);
-            Assert.AreEqual(car2.Body, carmock.cars[1].Body);
-            Assert.AreEqual(car2.Visibility, carmock.cars[1].Visibility);
-
-
+            Assert.AreEqual(cars[i].CarID, carmock.cars[i].CarID);
+            Assert.AreEqual(cars[i].Model, carmock.cars[i].Model);
+            Assert.AreEqual(cars[i].Year, carmock.cars[i].Year);
+            Assert.AreEqual(cars[i].Transmission, carmock.cars[i].Transmission);
+            Assert.AreEqual(cars[i].Brand, carmock.cars[i].Brand);
+            Assert.AreEqual(cars[i].Body, carmock.cars[i].Body);
+            Assert.AreEqual(cars[i].Visibility, carmock.cars[i].Visibility);
         }
 
     }
+    [TestMethod]
+    public void RemoveAuto()
+    {
+        //Arrange
+        CarMock carmock = new CarMock();
+
+        CarBLL carBLL = new CarBLL(carmock);
+
+        var carlist = carBLL.GetCars();
+        var getcar = carlist[0];
+        //Act
+        carBLL.RemoveAuto(getcar);
+        //Assert
+        Assert.AreEqual(1, carmock.cars.Count);
+        Assert.AreEqual(2, carmock.cars.First().CarID);
+        Assert.AreEqual("Mercedes", carmock.cars[0].Brand);
+        Assert.AreEqual("Cabrio", carmock.cars.First().Body);
+
+    }
+    [TestMethod]
+    public void EditAuto()
+    {
+        //Arrange
+
+        CarMock carmock = new CarMock();
+
+        CarBLL carBLL = new CarBLL(carmock);
+        Car car2 = new Car()
+        {
+            CarID = 2,
+            Body = "Hatchback",
+            Brand = "Honda",
+            Model = "Civic",
+            Transmission = "Automaat",
+            Year = "2018",
+            Visibility = true
+
+        };
+
+
+        //Act
+
+        carBLL.EditAuto(car2);
+
+
+        //Assert
+
+        Assert.AreEqual(car2.CarID, carmock.cars[1].CarID);
+        Assert.AreEqual(car2.Model, carmock.cars[1].Model);
+        Assert.AreEqual(car2.Year, carmock.cars[1].Year);
+        Assert.AreEqual(car2.Transmission, carmock.cars[1].Transmission);
+        Assert.AreEqual(car2.Brand, carmock.cars[1].Brand);
+        Assert.AreEqual(car2.Body, carmock.cars[1].Body);
+        Assert.AreEqual(car2.Visibility, carmock.cars[1].Visibility);
+
+
+    }
+
+}
 }

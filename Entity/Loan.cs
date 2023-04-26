@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Entity
@@ -15,7 +17,11 @@ namespace Entity
         public DateTime ReturnDate { get; set; }
         public int CarID { get; set; }
         public int UserID { get; set; }
-        public Car car { get; set; }
-        public User user { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
+        public Car? car { get; set; }
+        [JsonIgnore]
+        [IgnoreDataMember]
+        public User? user { get; set; } 
     }
 }

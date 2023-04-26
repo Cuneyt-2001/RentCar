@@ -50,6 +50,11 @@ namespace UnitTests.Mock
             return false;   
         }
 
+        public bool CheckUserInformation(User user)
+        {
+            throw new NotImplementedException();
+        }
+
         public int CreateAccount(User user)
         {
             users.Add(user);
@@ -77,6 +82,11 @@ namespace UnitTests.Mock
         {
             var result = users.Where(x => x.Email == email).Select(x => x.Role).SingleOrDefault();
             return result;
+        }
+
+        User IUserDAL.CheckUserInformation(User user)
+        {
+            throw new NotImplementedException();
         }
     }
 }

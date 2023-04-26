@@ -20,15 +20,15 @@ namespace BusinessLayer
         {
             return _IUserDAL.CreateAccount(user);
         }
-        public bool CheckUserInformation(string username, string password)
+        public User CheckUserInformation(User user)
         {
-            if (username == null || password == null)
+            if (user.Email == null || user.Password == null)
             {
-                return false;
+                return null;
             }
-            return _IUserDAL.CheckUserInformation(username, password);
-
+            return _IUserDAL.CheckUserInformation(user);
         }
+
         public int GetuserIdByEmail(string email)
         {
             return _IUserDAL.GetuserIdByEmail(email);

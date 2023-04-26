@@ -15,6 +15,7 @@ namespace DataAccessLayer.Concrete
             using var context_ = new Context();
             context_.Add(review);
             return context_.SaveChanges();
+            //carid bos geliyo ona bak bir de required fields error isi var
         }
 
         public List<Review> GetReviewbyID(int id)

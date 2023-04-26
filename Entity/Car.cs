@@ -9,6 +9,20 @@ namespace Entity
 {
     public class Car
     {
+        public Car()
+        {
+            //Look here
+            Loans = new List<Loan>();
+            Reviews = new List<Review>();
+            //Brand=String.Empty;
+            //Model = String.Empty;
+            //Year = String.Empty;
+            //Transmission = String.Empty;
+            //Body = String.Empty;
+            //Visibility = bool .Parse(string.Empty);
+
+
+        }
         [Key]
         public int CarID { get; set; } 
         public string Brand { get; set; }
@@ -17,11 +31,12 @@ namespace Entity
         public string Transmission { get; set; }
         public string Body { get; set; }
         public bool Visibility { get; set; }
+
         public List<Loan> Loans { get; set; }
-        public List<Review>Reviews { get; set; }
+        public List<Review> Reviews { get; set; }
 
 
-        
+
 
 
 

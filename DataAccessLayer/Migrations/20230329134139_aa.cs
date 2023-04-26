@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccessLayer.Migrations
 {
-    public partial class db : Migration
+    public partial class aa : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -78,7 +78,8 @@ namespace DataAccessLayer.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Reviewcontent = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserID = table.Column<int>(type: "int", nullable: false),
-                    CarID = table.Column<int>(type: "int", nullable: false)
+                    CarID = table.Column<int>(type: "int", nullable: false),
+                   
                 },
                 constraints: table =>
                 {
@@ -111,6 +112,8 @@ namespace DataAccessLayer.Migrations
                 name: "IX_Reviews_CarID",
                 table: "Reviews",
                 column: "CarID");
+               
+        
 
             migrationBuilder.CreateIndex(
                 name: "IX_Reviews_UserID",

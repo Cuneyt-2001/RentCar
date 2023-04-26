@@ -10,7 +10,7 @@ namespace DataAccessLayer.Interfaces
     public interface IUserDAL
     {
         int CreateAccount(User user);
-        bool CheckUserInformation(string username, string password);
+        User CheckUserInformation(User user);
         int GetuserIdByEmail(string email);
         bool GetuserTypeByEmail(string email);
         string GetUserNameByEmail(string email);

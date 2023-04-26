@@ -15,7 +15,7 @@ namespace DataAccessLayer
             //optionsbuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=DbRent; Integrated security=true;");
             //optionsbuilder.UseSqlServer("Server = mssqlstud.fhict.local; Database = dbi485604_Carr;");
           
-            optionsbuilder.UseSqlServer(@"Server = mssqlstud.fhict.local; Database = dbi485604_dbrent; User Id =dbi485604_dbrent;  MultipleActiveResultSets=True; Password = Emir20015454.;");
+            optionsbuilder.UseSqlServer(@"Server = mssqlstud.fhict.local; Database = dbi485604_car; User Id =dbi485604_car; MultipleActiveResultSets=True; Password =Emir20015454.;");
 
         }
 

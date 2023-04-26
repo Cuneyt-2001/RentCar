@@ -115,7 +115,7 @@ namespace UnitTests.Test
 
             };
             //Act
-            var barrowdaybiggerthanreturn = loan.CheckAvailibilityofBook(loan3);
+            var barrowdaybiggerthanreturn = loan.CheckAvailibilityofCar(loan3);
 
             //Assert
             Assert.IsFalse(barrowdaybiggerthanreturn);

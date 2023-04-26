@@ -10,15 +10,15 @@ namespace DataAccessLayer.Concrete
 {
     public class UserDAL : IUserDAL
     {
-        public bool CheckUserInformation(string email, string password)
+        public User CheckUserInformation(User user)
         {
             using var context_ = new Context();
-            var result = context_.Users.Where(x => x.Email == email && x.Password == password);
-            if (result.Any())
-            {
-                return true;
-            }
-            return false;
+            var result = context_.Users.FirstOrDefault(x => x.Email == user.Email && x.Password == user.Password);
+            //if (result.Any())
+            //{
+            //    return true;
+            //}
+            return result;
         }
 
         public int CreateAccount(User user)

@@ -18,7 +18,11 @@ namespace BusinessLayer
         }
         public int AddLoan(Loan loan)
         {
-            return _IloanDAL.AddLoan(loan); 
+            if (CheckAvailibilityofCar(loan) == true)
+            {
+                return _IloanDAL.AddLoan(loan);
+            }
+            return 0;
         }
         public List<Loan> GetAll()
         {
@@ -27,8 +31,9 @@ namespace BusinessLayer
         public List<Loan> GetLoanbyUser(int id)
         {
            return _IloanDAL.GetLoanbyUser(id);
+            ///
         }
-        public bool CheckAvailibilityofBook(Loan loan)
+        public bool CheckAvailibilityofCar(Loan loan)
         {
             TimeSpan timeSpan = loan.ReturnDate - loan.LoanDate;
             if (!(loan.LoanDate >= DateTime.Now.Date && loan.ReturnDate >= DateTime.Now.Date && loan.LoanDate.Date <= loan.ReturnDate && timeSpan.Days <= 20))
