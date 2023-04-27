@@ -22,6 +22,7 @@ namespace Entity
         public Car? car { get; set; }
         [JsonIgnore]
         [IgnoreDataMember]
-        public User? user { get; set; } 
+        public User? user { get; set; }
+       
     }
 }

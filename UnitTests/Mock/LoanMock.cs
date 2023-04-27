@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Interfaces;
+﻿using DataAccessLayer;
+using DataAccessLayer.Interfaces;
 using Entity;
 using System;
 using System.Collections.Generic;
@@ -49,10 +50,20 @@ namespace UnitTests.Mock
            return Loans;
         }
 
+        public List<Context.Table1AndTable2AndTable3> GetAll_()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Loan> GetLoanbyUser(int id)
         {
             List<Loan> loan_ = Loans.FindAll(x => x.UserID == id).ToList();
             return loan_;
+        }
+
+        public List<Context.Table1AndTable2> GetLoanbyUser_(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -35,14 +35,18 @@ namespace RentaCar.Controllers
             return BadRequest();
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        [HttpGet()]
+        [Route("GetLoan")]
+        public IActionResult GetLoan()
+         
         {
             var access = userBLL.GetuserTypeByEmail(User.FindFirst(ClaimTypes.Email).Value);
             if (access == false)
+
             {
+                var userId = userBLL.GetuserIdByEmail(User.FindFirst(ClaimTypes.Email).Value);
                 // Get the resource with the specified ID
-                var resource = loanbll.GetLoanbyUser(id);
+                var resource = loanbll.GetLoanbyUser_(userId);
 
                 // If the resource is not found, return a 404 Not Found response
                 if (resource == null)
@@ -55,6 +59,39 @@ namespace RentaCar.Controllers
             }
             return BadRequest();
         }
+        [HttpGet()]
+        [Route("GetAllLoans")]
+        public IActionResult GetAllLoans()
+        {
+            var access = userBLL.GetuserTypeByEmail(User.FindFirst(ClaimTypes.Email).Value);
+            if (access == true)
+
+            {
+               // var userId = userBLL.GetuserIdByEmail(User.FindFirst(ClaimTypes.Email).Value);
+                // Get the resource with the specified ID
+                var resource = loanbll.GetAll_();
+
+                // If the resource is not found, return a 404 Not Found response
+                if (resource == null)
+                {
+                    return NotFound();
+                }
+
+                // Return the resource as a JSON response
+                return Ok(resource);
+            }
+            return BadRequest();
+
+
+        }
+
+
+
+
+
+
+
+
 
         [HttpPost]
         public IActionResult Post(Loan loan)
@@ -85,6 +122,7 @@ namespace RentaCar.Controllers
             }
             return BadRequest();
         }
+       
 
 
     }

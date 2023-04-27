@@ -24,5 +24,23 @@ namespace DataAccessLayer
         public DbSet<Loan> Loans { get; set; }
         public DbSet<Review> Reviews { get; set; }
 
+
+
+        public class Table1AndTable2
+        {
+            public DateTime LoanDate { get; set; }
+            public DateTime ReturnDate { get; set; }
+            public string Car { get; set; }
+
+        }
+        public class Table1AndTable2AndTable3
+        {
+            public DateTime LoanDate { get; set; }
+            public DateTime ReturnDate { get; set; }
+            public string Car { get; set; }
+            public string user { get; set; }    
+
+        }
+
     }
 }

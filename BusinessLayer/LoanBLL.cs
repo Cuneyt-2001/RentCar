@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DataAccessLayer.Context;
 
 namespace BusinessLayer
 {
@@ -49,5 +50,17 @@ namespace BusinessLayer
             }
             return true;
         }
-    }
+        public List<Table1AndTable2> GetLoanbyUser_(int id)
+        {
+            return _IloanDAL.GetLoanbyUser_(id);
+
+
+
+        }
+       public List<Table1AndTable2AndTable3> GetAll_()
+        {
+            return _IloanDAL.GetAll_(); 
+        }
+        
+        }
 }
