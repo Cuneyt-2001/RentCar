@@ -50,6 +50,11 @@ namespace UnitTests.Mock
            return Loans;
         }
 
+        public List<Context.ReviewDto> GetAllReviews_(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Context.Table1AndTable2AndTable3> GetAll_()
         {
             throw new NotImplementedException();

@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.Interfaces;
 using Entity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +43,7 @@ namespace DataAccessLayer.Concrete
         public Car GetCar(int id)
         {
             using var context_ = new Context();
-            return context_.Cars.ToList().Where(x => x.CarID == id).First();
+            return context_.Cars.Include(a=>a.Reviews).ToList().Where(x => x.CarID == id).First();
             // return context_.Set<Car>().Find(id);
         }
 

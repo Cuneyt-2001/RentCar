@@ -85,14 +85,7 @@ namespace RentaCar.Controllers
 
         }
 
-
-
-
-
-
-
-
-
+    
         [HttpPost]
         public IActionResult Post(Loan loan)
         {

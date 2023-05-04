@@ -34,15 +34,15 @@ namespace RentaCar.Controllers
            // var role = User.FindFirst(ClaimTypes.Role).Value;
 
             var access = userBLL.GetuserTypeByEmail(User.FindFirst(ClaimTypes.Email).Value);
-            if (access == false||true)
-            {
+           
+            
 
                 // Get the list of resources
                 var resources = carBLL.GetCars();
 
                 // Return the list of resources as a JSON response
                 return Ok(resources);
-            }
+            
             return BadRequest();
         }
 
@@ -129,8 +129,9 @@ namespace RentaCar.Controllers
                 ValidationResult result = validations.Validate(car);
                 if (result.IsValid)
                 {
+                    car.CarID = id;
                     // Update the existing resource
-                    var updatedResource = carBLL.EditAuto(getcar);
+                    var updatedResource = carBLL.EditAuto(car);
 
                     // Return the updated resource as a JSON response
                     if (updatedResource)

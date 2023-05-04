@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DataAccessLayer.Context;
 
 namespace DataAccessLayer.Concrete
 {
@@ -15,8 +16,10 @@ namespace DataAccessLayer.Concrete
             using var context_ = new Context();
             context_.Add(review);
             return context_.SaveChanges();
-            //carid bos geliyo ona bak bir de required fields error isi var
+           
         }
+
+       
 
         public List<Review> GetReviewbyID(int id)
         {

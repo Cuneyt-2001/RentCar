@@ -15,6 +15,7 @@ namespace DataAccessLayer.Interfaces
         List<Loan> GetLoanbyUser(int id);
         List<Table1AndTable2> GetLoanbyUser_(int id);
         List<Table1AndTable2AndTable3> GetAll_();
+        List<ReviewDto> GetAllReviews_(int id);
 
     }
 }

@@ -1,10 +1,12 @@
-﻿using DataAccessLayer.Interfaces;
+﻿using DataAccessLayer;
+using DataAccessLayer.Interfaces;
 using Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DataAccessLayer.Context;
 
 namespace UnitTests.Mock
 {
@@ -40,6 +42,11 @@ namespace UnitTests.Mock
         {
             reviews.Add(review);
             return reviews.Count;
+        }
+
+        public List<ReviewDto> GetAllReviews_(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Review> GetReviewbyID(int id)

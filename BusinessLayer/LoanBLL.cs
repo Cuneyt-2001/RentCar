@@ -61,6 +61,11 @@ namespace BusinessLayer
         {
             return _IloanDAL.GetAll_(); 
         }
-        
+        public List<ReviewDto> GetAllReviews_(int id)
+        {
+            return _IloanDAL.GetAllReviews_(id);
+
         }
+
+    }
 }

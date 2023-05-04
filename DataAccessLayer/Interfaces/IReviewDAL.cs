@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static DataAccessLayer.Context;
 
 namespace DataAccessLayer.Interfaces
 {
@@ -11,5 +12,6 @@ namespace DataAccessLayer.Interfaces
     {
         int AddReview(Review review);
         List<Review> GetReviewbyID(int id);
+      
     }
 }

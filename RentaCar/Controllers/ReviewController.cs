@@ -17,7 +17,7 @@ namespace RentaCar.Controllers
     {
         ReviewBLL reviewbll = new ReviewBLL(new ReviewDAL());
         UserBLL userBLL = new UserBLL(new UserDAL());
-
+        LoanBLL loanbll=new LoanBLL(new LoanDAL());
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
@@ -39,6 +39,8 @@ namespace RentaCar.Controllers
             }
             return BadRequest();
         }
+
+     
         [HttpPost]
 
         public IActionResult Post(Review review)
@@ -69,5 +71,8 @@ namespace RentaCar.Controllers
             }
             return BadRequest();
         }
+
+
+        
     }
 }

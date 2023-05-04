@@ -42,5 +42,14 @@ namespace DataAccessLayer
 
         }
 
+        public class ReviewDto
+        {
+            public string ReviewContent { get; set; }
+            public string user { get; set; }
+            public string Car { get; set; }
+
+
+        }
+
     }
 }
