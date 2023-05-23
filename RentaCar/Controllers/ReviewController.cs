@@ -1,11 +1,13 @@
 ﻿using BusinessLayer;
 using BusinessLayer.Validations;
+using DataAccessLayer;
 using DataAccessLayer.Concrete;
 using Entity;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RentaCar.ViewModels;
 using System.Security.Claims;
 
 namespace RentaCar.Controllers
@@ -17,7 +19,13 @@ namespace RentaCar.Controllers
     {
         ReviewBLL reviewbll = new ReviewBLL(new ReviewDAL());
         UserBLL userBLL = new UserBLL(new UserDAL());
-        LoanBLL loanbll=new LoanBLL(new LoanDAL());
+        LoanBLL loanbll = new LoanBLL(new LoanDAL());
+        private readonly Context _context;
+
+        public ReviewController(Context context)
+        {
+            _context = context;
+        }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
@@ -40,30 +48,42 @@ namespace RentaCar.Controllers
             return BadRequest();
         }
 
-     
+
         [HttpPost]
 
-        public IActionResult Post(Review review)
+        public IActionResult Post(ReviewAddViewModel model)
         {
             var access = userBLL.GetuserTypeByEmail(User.FindFirst(ClaimTypes.Email).Value);
-            if (access == false || true)
-            {
+            //if (access == false || true)
+            //{
 
 
                 ReviewValidations validate = new ReviewValidations();
-                ValidationResult validationResult = validate.Validate(review);
+                ValidationResult validationResult = validate.Validate(model.Review);
                 if (validationResult.IsValid)
                 {
+                    foreach (var item in model.FeelingIds)
+                    {
+                        var feeling = _context.Feeling.Find(item);
+                        if (feeling is not null)
+                        {
+                            model.Review.Feelings.Add(feeling);
+                        }
+                    }
+
                     // Create the new resource
                     var userId = userBLL.GetuserIdByEmail(User.FindFirst(ClaimTypes.Email).Value);
-                    review.UserID = userId;
+                    model.Review.UserID = userId;
 
-                    var newcar = reviewbll.AddReview(review);
+                    var newcar = reviewbll.AddReview(model.Review);
+
+
+
                     if (newcar > 0)
                     {
                         return Ok();
                     }
-                }
+                //}
 
                 //var errorMessages = new List<string>();
                 //errorMessages.AddRange(validationResult.Errors.Select(a=>a.ErrorMessage));
@@ -73,6 +93,6 @@ namespace RentaCar.Controllers
         }
 
 
-        
+
     }
 }

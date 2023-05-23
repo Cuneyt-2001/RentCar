@@ -16,33 +16,33 @@ namespace RentaCar.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize()]
-    
+
     public class CarController : ControllerBase
     {
 
         CarBLL carBLL = new CarBLL(new CarDAL());//
-        UserBLL userBLL=new UserBLL(new UserDAL()); 
+        UserBLL userBLL = new UserBLL(new UserDAL());
 
         [HttpGet]
         public IActionResult Get()
         {
-           // var claims = User.Claims;
-           // var userId = userBLL.GetuserIdByEmail(User.FindFirst(ClaimTypes.Email).Value);
-           // var test = User.FindFirst(ClaimTypes.Email).Value;
+            // var claims = User.Claims;
+            // var userId = userBLL.GetuserIdByEmail(User.FindFirst(ClaimTypes.Email).Value);
+            // var test = User.FindFirst(ClaimTypes.Email).Value;
             // Use the claims as needed.
 
-           // var role = User.FindFirst(ClaimTypes.Role).Value;
+            // var role = User.FindFirst(ClaimTypes.Role).Value;
 
             var access = userBLL.GetuserTypeByEmail(User.FindFirst(ClaimTypes.Email).Value);
-           
-            
 
-                // Get the list of resources
-                var resources = carBLL.GetCars();
 
-                // Return the list of resources as a JSON response
-                return Ok(resources);
-            
+
+            // Get the list of resources
+            var resources = carBLL.GetCars();
+
+            // Return the list of resources as a JSON response
+            return Ok(resources);
+
             return BadRequest();
         }
 
@@ -51,23 +51,29 @@ namespace RentaCar.Controllers
         public IActionResult Get(int id)
         {
             var access = userBLL.GetuserTypeByEmail(User.FindFirst(ClaimTypes.Email).Value);
-            if (access == false || true)
-            {
+            
+            
                 var userId = userBLL.GetuserIdByEmail(User.FindFirst(ClaimTypes.Email).Value);
 
                 // Get the resource with the specified ID
-                var resource = carBLL.GetCar(id);
+                //var resource = new List<object>();
+                var car = carBLL.GetCar(id);
+                //var feelings = new List<Feeling>();
+                //feelings.Add(new Feeling { FeelingID = 1, Feel = "Positive" });
 
+                //resource.Add(car);
+                //resource.Add(feelings);
                 // If the resource is not found, return a 404 Not Found response
-                if (resource == null)
+                if (car == null)
                 {
                     return NotFound();
                 }
 
                 // Return the resource as a JSON response
-                return Ok(resource);
-            }
-            return NotFound();
+                //return Ok(new { resource });
+                return Ok(car);
+            
+            return BadRequest();
         }
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
@@ -89,7 +95,7 @@ namespace RentaCar.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Post( Car car)
+        public IActionResult Post(Car car)
         {
             var access = userBLL.GetuserTypeByEmail(User.FindFirst(ClaimTypes.Email).Value);
             if (access == true)
@@ -105,11 +111,11 @@ namespace RentaCar.Controllers
                     return CreatedAtAction(nameof(Get), new { id = car.CarID }, car);
                 }
             }
-            return BadRequest();    
+            return BadRequest();
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id,  Car car)
+        public IActionResult Put(int id, Car car)
         {
             var access = userBLL.GetuserTypeByEmail(User.FindFirst(ClaimTypes.Email).Value);
             if (access == true)

@@ -22,6 +22,7 @@ namespace Entity
         public string Reviewcontent { get; set; }
         public int? UserID { get; set; }
         public int? CarID { get; set; }
+        public List<Feeling>? Feelings { get; set; } = new List<Feeling>();
         [JsonIgnore]
         [IgnoreDataMember]
         public Car? car { get; set; } 
