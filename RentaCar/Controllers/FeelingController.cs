@@ -23,7 +23,6 @@ namespace RentaCar.Controllers
            // var access = userBLL.GetuserTypeByEmail(User.FindFirst(ClaimTypes.Email).Value);
 
 
-
             // Get the list of resources
             var resources = feelingbll.GetFeelings();
 

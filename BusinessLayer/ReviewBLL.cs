@@ -17,9 +17,9 @@ namespace BusinessLayer
         {
             _IReviewDAL = iReviewDAL;
         }
-        public int AddReview(Review review)
+        public int AddReview(Review review, int[] feelings)
         {
-            return _IReviewDAL.AddReview(review);
+            return _IReviewDAL.AddReview(review,feelings);
 
         }
         public List<Review> GetReviewbyID(int id)

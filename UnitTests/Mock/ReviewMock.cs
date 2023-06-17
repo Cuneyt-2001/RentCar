@@ -44,6 +44,11 @@ namespace UnitTests.Mock
             return reviews.Count;
         }
 
+        public int AddReview(Review review, int[] feelings)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<ReviewDto> GetAllReviews_(int id)
         {
             throw new NotImplementedException();

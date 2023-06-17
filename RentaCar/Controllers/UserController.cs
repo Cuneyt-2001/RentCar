@@ -124,7 +124,7 @@ namespace RentaCar.Controllers
                 role = user.Role,
                 email=user.Email,
                 userid=user.UserID,
-                //userId =1 //user.UserID
+               
             };
 
             return response;

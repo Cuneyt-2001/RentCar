@@ -90,8 +90,7 @@ namespace RentaCar.Controllers
         public IActionResult Post(Loan loan)
         {
             var access = userBLL.GetuserTypeByEmail(User.FindFirst(ClaimTypes.Email).Value);
-            if (access == true || false)
-            {
+          
 
 
 
@@ -112,7 +111,7 @@ namespace RentaCar.Controllers
                     // Return the newly created resource as a JSON response
                     return CreatedAtAction(nameof(Get), new { id = loan.LoanID }, loan);
                 }
-            }
+            
             return BadRequest();
         }
        

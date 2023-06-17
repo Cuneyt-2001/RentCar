@@ -11,6 +11,6 @@ namespace Entity
     {
         public int FeelingID { get; set; }
         public string Feel { get; set; }
-        public List<Review> Allreviews{get;set;}//
+        public List<Review> Allreviews{get;set;}
     }
 }

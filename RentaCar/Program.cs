@@ -1,18 +1,24 @@
+using DataAccessLayer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using RentaCar.Controllers;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//Burayi kaldirdim
+//builder.Services.AddSingleton<Context>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-
-    builder.Services.AddAuthentication(options =>
+//dikkat et
+builder.Services.AddSignalR();
+//dikkat et
+builder.Services.AddAuthentication(options =>
     {
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -70,9 +76,30 @@ builder.Services.AddAuthorization(options =>
             .Build();
 
     });
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyHeader()
+               .AllowAnyMethod()
+               .AllowCredentials()
+               .WithOrigins("http://localhost:3000");
+    });
 
-    var app = builder.Build();
-app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000"));//
+    options.AddPolicy("HubPolicy",
+        builder =>
+        {
+            builder.AllowAnyHeader()
+                   .AllowAnyMethod()
+                   .AllowCredentials()
+                   .WithOrigins("http://localhost:3000");
+        });
+});
+
+
+var app = builder.Build();
+//app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000"));//
+
 
 
 // Configure the HTTP request pipeline.
@@ -84,13 +111,26 @@ if (app.Environment.IsDevelopment())
 builder.Services.AddCors();//
 
 app.UseHttpsRedirection();
-    
+//dikkat et
 
-    app.UseAuthorization();
+app.UseRouting();
+app.UseCors();
+app.UseWebSockets();
+
+//dikkat et
+
+app.UseAuthorization();
 
     app.MapControllers();
+//dikkat et
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHub<MessageHub>("/messagehub");
+});
+//dikkat et
 
 
-    app.Run();
+app.Run();
 
 

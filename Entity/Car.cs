@@ -11,15 +11,10 @@ namespace Entity
     {
         public Car()
         {
-            //Look here
+           
             Loans = new List<Loan>();
             Reviews = new List<Review>();
-            //Brand=String.Empty;
-            //Model = String.Empty;
-            //Year = String.Empty;
-            //Transmission = String.Empty;
-            //Body = String.Empty;
-            //Visibility = bool .Parse(string.Empty);
+        
 
 
         }

@@ -32,7 +32,7 @@ namespace BusinessLayer
         public List<Loan> GetLoanbyUser(int id)
         {
            return _IloanDAL.GetLoanbyUser(id);
-            ///
+            
         }
         public bool CheckAvailibilityofCar(Loan loan)
         {

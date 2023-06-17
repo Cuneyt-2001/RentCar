@@ -10,7 +10,18 @@ namespace DataAccessLayer.Interfaces
 {
     public interface IReviewDAL
     {
-        int AddReview(Review review);
+        /// <summary>
+        /// Het toevoegen van een review
+        /// </summary>
+        /// <param name="review"></param>
+        /// <param name="feelings"></param>
+        /// <returns> geeft 1 als de review succesvol opgeslagen is</returns>
+        int AddReview(Review review, int[] feelings);
+        /// <summary>
+        /// Geeft de lijst van reviews op basis van gebruiker
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>geeft de lijst</returns>
         List<Review> GetReviewbyID(int id);
       
     }

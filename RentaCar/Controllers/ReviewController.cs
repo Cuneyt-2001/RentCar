@@ -20,12 +20,8 @@ namespace RentaCar.Controllers
         ReviewBLL reviewbll = new ReviewBLL(new ReviewDAL());
         UserBLL userBLL = new UserBLL(new UserDAL());
         LoanBLL loanbll = new LoanBLL(new LoanDAL());
-        private readonly Context _context;
+     
 
-        public ReviewController(Context context)
-        {
-            _context = context;
-        }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
@@ -50,45 +46,34 @@ namespace RentaCar.Controllers
 
 
         [HttpPost]
-
         public IActionResult Post(ReviewAddViewModel model)
         {
             var access = userBLL.GetuserTypeByEmail(User.FindFirst(ClaimTypes.Email).Value);
-            //if (access == false || true)
-            //{
+            
 
+            if (string.IsNullOrEmpty(model.ReviewContent))
+            {
 
-                ReviewValidations validate = new ReviewValidations();
-                ValidationResult validationResult = validate.Validate(model.Review);
-                if (validationResult.IsValid)
-                {
-                    foreach (var item in model.FeelingIds)
-                    {
-                        var feeling = _context.Feeling.Find(item);
-                        if (feeling is not null)
-                        {
-                            model.Review.Feelings.Add(feeling);
-                        }
-                    }
-
-                    // Create the new resource
-                    var userId = userBLL.GetuserIdByEmail(User.FindFirst(ClaimTypes.Email).Value);
-                    model.Review.UserID = userId;
-
-                    var newcar = reviewbll.AddReview(model.Review);
-
-
-
-                    if (newcar > 0)
-                    {
-                        return Ok();
-                    }
-                //}
-
-                //var errorMessages = new List<string>();
-                //errorMessages.AddRange(validationResult.Errors.Select(a=>a.ErrorMessage));
-                //return BadRequest(new { success = false, errorMessages });
             }
+
+            var userId = userBLL.GetuserIdByEmail(User.FindFirst(ClaimTypes.Email).Value);
+
+            var review = new Review
+            {
+                CarID= model.CarId,
+                Reviewcontent =model.ReviewContent,
+                UserID = userId
+            };
+
+            var reviewResult = reviewbll.AddReview(review, model.FeelingIds);
+
+
+
+            if (reviewResult > 0)
+            {
+                return Ok();
+            }
+
             return BadRequest();
         }
 

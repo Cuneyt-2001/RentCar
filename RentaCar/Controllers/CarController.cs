@@ -56,13 +56,9 @@ namespace RentaCar.Controllers
                 var userId = userBLL.GetuserIdByEmail(User.FindFirst(ClaimTypes.Email).Value);
 
                 // Get the resource with the specified ID
-                //var resource = new List<object>();
+               
                 var car = carBLL.GetCar(id);
-                //var feelings = new List<Feeling>();
-                //feelings.Add(new Feeling { FeelingID = 1, Feel = "Positive" });
-
-                //resource.Add(car);
-                //resource.Add(feelings);
+               
                 // If the resource is not found, return a 404 Not Found response
                 if (car == null)
                 {
@@ -70,7 +66,7 @@ namespace RentaCar.Controllers
                 }
 
                 // Return the resource as a JSON response
-                //return Ok(new { resource });
+               
                 return Ok(car);
             
             return BadRequest();

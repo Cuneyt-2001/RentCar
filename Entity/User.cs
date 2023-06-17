@@ -11,7 +11,7 @@ namespace Entity
     {
         public User()
         {
-            //Look here
+            
             Loans = new List<Loan>();
             Reviews = new List<Review>();
          

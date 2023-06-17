@@ -14,10 +14,6 @@ namespace DataAccessLayer.Concrete
         {
             using var context_ = new Context();
             var result = context_.Users.FirstOrDefault(x => x.Email == user.Email && x.Password == user.Password);
-            //if (result.Any())
-            //{
-            //    return true;
-            //}
             return result;
         }
 

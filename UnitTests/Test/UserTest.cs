@@ -148,32 +148,6 @@ namespace UnitTests.Test
             Assert.AreEqual(result2, userMock.users[1].Name);
             Assert.AreEqual(result, userMock.users[0].Name);
         }
-        //[TestMethod]
-        //public void Check_User_Information()
-        //{
-        //    //Arrange
-
-        //    UserMock userMock = new UserMock();
-        //    UserBLL userbll = new(userMock);
-
-        //    User user = new User()
-        //    {
-        //        Email = "Tim@gmail.com",
-        //        Password = "1234567890"
-        //    };
-
-
-        //    //Act
-        //    var result = userbll.CheckUserInformation(user.Email, user.Password);
-
-
-        //    // Assert
-        //    Assert.IsTrue(result);
-        //    Assert.AreEqual(user.Email, userMock.users[1].Email);
-        //    Assert.AreEqual(user.Password, userMock.users[1].Password);
-
-
-        //}
 
         [TestMethod]
         public void GetAllUsers()
